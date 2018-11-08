@@ -1,0 +1,65 @@
+
+<body>
+	<div class="d-flex p-2 bd-highlight">
+	    <form class="form-inline my-2 my-lg-0" action="/search" method="POST">
+		    <input class="form-control mr-sm-2" type="search" name="currency" placeholder="Rechercher" aria-label="Search">
+		    <button class="btn btn-outline-secondary my-2 my-sm-0" type="submit">Rechercher</button>
+	    	<a class="btn btn-outline-secondary my-2 my-sm-0" href="/refrech">Refrech</a>
+
+
+
+			<div class="dropdown">
+			  <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenu2" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+			    Dropdown
+			  </button>
+			  <div class="dropdown-menu" aria-labelledby="dropdownMenu2">
+    	    <input type="hidden" name="authenticity_token" value="<%= form_authenticity_token %>">
+	    </form>
+
+		<div>
+		<% @cripto_id = 1 %>
+		<% @all_currency.each do |cripto| %>
+			<form class="form-inline my-2 my-lg-0" action="/search" method="POST">
+    	    <input type="hidden" name="authenticity_token" value="<%= form_authenticity_token %>">
+    	    <input type="hidden" name="currency" value="<%= cripto[:currency] %>">
+			<button class="dropdown-item" type="submit"><%= cripto[:currency] %></button>
+			</form>
+		<% @cripto_id += 1 %>
+		<% end %>
+		</div>
+
+
+
+			  </div>
+			</div>
+
+
+
+
+
+
+
+	</div>
+	<table class="table">
+	  <thead class="thead-dark">
+	    <tr>
+	      <th scope="col">#</th>
+	      <th scope="col">Nom</th>
+	      <th scope="col">Valeur</th>
+	    </tr>
+	  </thead>
+	  <tbody>
+		<div>
+		<% @cripto_id = 1 %>
+		<% @all_currency.each do |cripto| %>
+	    <tr>
+	      <th scope="row"><%= @cripto_id %></th>
+	      <td><%= cripto[:currency] %></td>
+	      <td><%= cripto[:value] %></td>
+	    </tr>
+		<% @cripto_id += 1 %>
+		<% end %>
+		</div>
+	  </tbody>
+	</table>
+</body>
